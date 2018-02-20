@@ -1,11 +1,15 @@
 from flask_login import LoginManager, login_user, login_required, logout_user
 from flask import Flask, request, render_template, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
+
+from .config import SQLALCHEMY_DATABASE_URI
 from .forms import SignupForm
-from .models import db, User
 
 app = Flask(__name__)
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////database/database.sqlite'
+app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
+db = SQLAlchemy(app)
+from .models import User
 
 login_manager = LoginManager()
 login_manager.init_app(app)

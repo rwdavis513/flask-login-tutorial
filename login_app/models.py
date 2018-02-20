@@ -1,14 +1,13 @@
-from app import app
-from flask_sqlalchemy import SQLAlchemy
+from login_app.app import db
+
 from sqlalchemy import Column, String
 from flask_login import UserMixin
-
-db = SQLAlchemy(app)
+from .config import SQLALCHEMY_DATABASE_URI
 
 
 class User(UserMixin):
-    email = Column(String(80), primary_key=True, unique=True)
-    password = Column(String(80))
+    email = db.Column(String(80), primary_key=True, unique=True)
+    password = db.Column(String(80))
 
     def __init__(self, email, password):
         self.email = email

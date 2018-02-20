@@ -1,4 +1,5 @@
 data/*
+*.pytest*
 .coverage*
 .env
 env-list
