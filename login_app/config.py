@@ -1,3 +1,4 @@
+# WTF_CSRF_ENABLED = False
 
-
-SQLALCHEMY_DATABASE_URI = 'sqlite:////db/database.sqlite'
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+SQLALCHEMY_DATABASE_URI = 'sqlite:///database.sqlite'

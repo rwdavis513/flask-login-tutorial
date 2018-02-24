@@ -1,5 +1,12 @@
 import pytest
-from login_app import app
+from app import app
+from flask_app import init_db
+
+
+def setup():
+    init_db()
+    print("Created database")
+
 
 @pytest.fixture
 def client(request):
@@ -14,7 +21,15 @@ def client(request):
     return client
 
 
-def test_isAlive():
+def test_isAlive(client):
+    response = client.get('/')
+    assert response.status_code == 200
 
-    response = client.post('/')
+
+def test_signup_post(client):
+    with app.app_context():
+        response = client.post('/signup', data=dict(email="test@email.com",
+                                                password="123456",
+                                                csrf_token=client.csrf_token), follow_redirects=True)
+    print(response.data)
     assert response.status_code == 200
